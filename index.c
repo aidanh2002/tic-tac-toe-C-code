@@ -1,6 +1,6 @@
-#include <stdio.h> 			// includes printf / scanf ; allows for inputs & outputs
+#include <stdio.h> 		// includes printf / scanf ; allows for inputs & outputs
 #include <stdlib.h> 		// includes random number generating functions
-#include <time.h>			// includes time() function ; seconds passed since 1970 
+#include <time.h>		// includes time() function ; seconds passed since 1970 
 
 #define side 3
 
@@ -21,14 +21,16 @@
 // Global variables
 
 	
-	int PlayerScore, ComputerScore, Ties;
+	int PlayerScore, ComputerScore, Ties;				
 	int GameNumber = 1;
 	int row, col;
-	char BoardArr[side][side];
+	char BoardArr[side][side];		
 	char winner;
 	char PlayAgain = 'Y';
 	const char player = 'X';
 	const char computer = 'O';
+
+	// The use of global variables makes the code a lot smoother, allowing for pass by reference to occur within functions w/o pointers
 
 
 // Beginning of main-code function
@@ -40,7 +42,8 @@
 		
 		do {	
 		
-			GameNumber = 1;					// resets # of wins for each plater and resets winner to '_' i.e. no winner. Occurs after each BO3 game
+			GameNumber = 1;			
+			// resets # of wins for each plater and resets winner to '_' i.e. no winner. Occurs after each BO3 game
 			PlayerScore = 0;
 			ComputerScore = 0;
 			Ties = 0;				
@@ -59,7 +62,8 @@
 						
 							if (winner != '_' || FreeSpacesLeft() ==0 ) {
 								
-								break;												// will break out of while loop; means there is either a winner or no spaces left i.e. a tie
+								break;		
+								// will break out of while loop; means there is either a winner or no spaces left i.e. a tie
 							}
 							
 						ComputerMove();
@@ -80,7 +84,8 @@
 					
 					GameNumber++;				
 
-			} while (GameNumber <= 3);						// will exit do-while loop once GameNumber == 3 (i.e. after 3 games as GameNumber increases by 1 per game)
+			} while (GameNumber <= 3);			
+			// will exit do-while loop once GameNumber == 3 (i.e. after 3 games as GameNumber increases by 1 per game)
 				
 				printf("\nWould you like to play again? Enter 'Y' for yes & to play again, enter 'N' for no & to exit program.\n");
 				printf("Selection: "); scanf("%s", &PlayAgain);			
@@ -99,11 +104,10 @@
 				}
 				
 			
-		} while(PlayAgain == 'Y');							//end of most outer do-while loop; exits program out when PlayAgain != 'Y'
+		} while(PlayAgain == 'Y');				//end of most outer do-while loop; exits program out when PlayAgain != 'Y'
 		
 			printf("\nClosing program, goodbye :( .");
-			return 0;
-		
+			return 0;	
 	}
 	
 	
@@ -128,7 +132,7 @@
 		printf("\t\t\t ---------\n");					//				 col1   col2   col3	
 		printf("\t\t\t 4 | 5 | 6 \n");					//        row 1 [0][0] [0][1] [0][2]   ==   1  2  3
 		printf("\t\t\t --------- \n");					// note:  row 2 [1][0] [1][1] [1][2]   ==   4  5  6
-		printf("\t\t\t 7 | 8 | 9 \n");					//		  row 3 [2][0] [2][1] [2][2]   ==   7  8  9
+		printf("\t\t\t 7 | 8 | 9 \n");					//	  row 3 [2][0] [2][1] [2][2]   ==   7  8  9
 		printf("\n-\t-\t-\t-\t-\t-\t-\t-\t-\n");
 		printf("\t\t  Player = 'X' | CPU = 'O'\n");
 	}
@@ -160,8 +164,9 @@
 	
 	
 	void ComputerMove()  {	
-		//creates a seed of random numbers based off time since code has been running
-		srand(time(0)); 
+	
+		srand(time(0)); 	
+		//creates a seed of random numbers based off time since year 19XX.. (Use modulus operator to decrease to a # between 1-9)
 		int ComputerPick;
 		
 		if (FreeSpacesLeft() > 0) {
@@ -176,7 +181,7 @@
 		}		
 		else{
 			
-			ShowWinner('_'); 					// draw!
+			ShowWinner('_'); 			// draw!
 		}		
 	}
 	
@@ -238,7 +243,7 @@
 			return BoardArr[2][0];	
 		}
 	
-		return winner = '_';							//No winner yet : Winner stays = '_' i.e. there is no winner yet, and the game continues
+		return winner = '_';			//No winner yet : Winner stays = '_' i.e. there is no winner yet, and the game continues
 		
 	}
 	
@@ -252,7 +257,8 @@
 			}
 			else if (winner == computer)  {								
 				
-				printf("\nComputer wins! Player loses! :(\n\n");			// will print the winner after each match, and add 1 to their # of wins, resets every 3 matches played
+				printf("\nComputer wins! Player loses! :(\n\n");	
+				// will print the winner after each match, and add 1 to their # of wins, resets every 3 matches played
 				ComputerScore++;
 			}
 			else  {
